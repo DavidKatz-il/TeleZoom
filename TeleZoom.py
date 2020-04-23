@@ -15,11 +15,10 @@ class TeleZoomBot(TelegramBot):
         :param token: telegram bot token, given by BotFather.
         """
         super().__init__(token)
-        self.msg = "Please send me 'url password' (password is optimal)."
-        self.start_msg = (
-            "Welcome to TeleZoom.\n"
-            "Downloading recording videos from zoom.us/rec/.\n" + self.msg
-        )
+        self.msg = "Please send me 'url password' (password is optional)."
+        self.start_msg = f"Welcome to TeleZoom.\n" \
+                         f"Downloading recording videos from zoom.us/rec/.\n" \
+                         f"{self.msg}"
 
     def handle_updates(self):
         """
@@ -82,8 +81,8 @@ class TeleZoomBot(TelegramBot):
             if int(res.headers["content-length"]) >= (50 * 1024):
                 self.send_message(
                     chat_id,
-                    "The Video is more then 50 MB.\n"
-                    "Bots can currently send video files of up to 50 MB in size.",
+                    f"The Video is more then 50 MB.\n"
+                    f"Telegram Bots can currently send video files of up to 50 MB in size.",
                 )
                 return
 

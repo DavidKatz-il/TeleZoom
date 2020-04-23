@@ -21,7 +21,7 @@ class TelegramBot:
         """
         stores new incoming updates.
         """
-        url = self.base_url + self.token + "/getUpdates"
+        url = f"{self.base_url}{self.token}/getUpdates"
         if self.last_id:
             url = f"{url}?offset={self.last_id}"
         self.updates = requests.get(url).json()["result"]
@@ -40,7 +40,7 @@ class TelegramBot:
         :param chat_id: Unique identifier user_id / user_name / chat_id
         :param text: Text of the message to be sent
         """
-        url = self.base_url + self.token + "/sendMessage"
+        url = f"{self.base_url}{self.token}/sendMessage"
         params = {"chat_id": int(chat_id), "text": text}
         requests.get(url, params=params)
 
@@ -50,7 +50,7 @@ class TelegramBot:
         :param chat_id: Unique identifier user_id / user_name / chat_id
         :param video: video file to be sent
         """
-        url = self.base_url + self.token + "/sendVideo"
+        url = f"{self.base_url}{self.token}/sendVideo"
         data = {"chat_id": int(chat_id)}
         files = {"video": video}
         requests.post(url, data=data, files=files)
@@ -61,13 +61,12 @@ class TelegramBot:
         :param chat_id: Unique identifier user_id / user_name / chat_id
         :param text: Text of the message to be sent
         """
+        url = f"{self.base_url}{self.token}/sendMessage"
         reply_markup = {
             "keyboard": [[{"text": "Press Me", "request_contact": True}]],
             "one_time_keyboard": True,
             "resize_keyboard": True,
         }
-
-        url = self.base_url + self.token + "/sendMessage"
         params = {
             "chat_id": chat_id,
             "text": text,
