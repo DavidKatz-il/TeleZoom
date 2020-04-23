@@ -1,2 +1,2 @@
 # TeleZoom
-Telegram Bot - Downloading recording videos from zoom.us/rec/play
+Telegram Bot - Downloading recording videos from zoom.us/rec/
